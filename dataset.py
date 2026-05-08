@@ -1,18 +1,6 @@
-# ============================================
-# AI Customer Complaint Intelligence System
-# Real Dataset Collection from Google Play Store
-# ============================================
-
-# Install first:
-# pip install google-play-scraper pandas
-
 from google_play_scraper import reviews, Sort
 import pandas as pd
 import time
-
-# ============================================
-# APPS TO SCRAPE
-# ============================================
 
 apps = {
     "Swiggy": "com.swiggy.android",
@@ -22,15 +10,8 @@ apps = {
     "Amazon": "in.amazon.mShop.android.shopping"
 }
 
-# ============================================
-# EMPTY LIST TO STORE ALL REVIEWS
-# ============================================
-
 all_reviews = []
 
-# ============================================
-# SCRAPE REVIEWS
-# ============================================
 
 for app_name, app_id in apps.items():
 
@@ -64,29 +45,11 @@ for app_name, app_id in apps.items():
     except Exception as e:
         print(f"Error scraping {app_name}: {e}")
 
-# ============================================
-# CREATE DATAFRAME
-# ============================================
 
 df = pd.DataFrame(all_reviews)
 
-# ============================================
-# REMOVE EMPTY REVIEWS
-# ============================================
-
 df = df[df['review'].notnull()]
-
-# ============================================
-# KEEP MOSTLY COMPLAINTS
-# (Negative + Neutral Reviews)
-# ============================================
-
 df = df[df['rating'] <= 3]
-
-# ============================================
-# CREATE SENTIMENT LABELS
-# ============================================
-
 def get_sentiment(rating):
 
     if rating <= 2:
@@ -99,10 +62,6 @@ def get_sentiment(rating):
         return "Positive"
 
 df['sentiment'] = df['rating'].apply(get_sentiment)
-
-# ============================================
-# CREATE ESCALATION FLAG
-# ============================================
 
 def escalation_flag(review):
 
@@ -129,10 +88,6 @@ def escalation_flag(review):
 
 df['escalation_risk'] = df['review'].apply(escalation_flag)
 
-# ============================================
-# SIMPLE CATEGORY TAGGING
-# ============================================
-
 def categorize_complaint(review):
 
     review = str(review).lower()
@@ -156,70 +111,28 @@ def categorize_complaint(review):
         return "General Complaint"
 
 df['category'] = df['review'].apply(categorize_complaint)
-
-# ============================================
-# REMOVE DUPLICATES
-# ============================================
-
 df.drop_duplicates(subset=['review'], inplace=True)
-
-# ============================================
-# SAVE DATASET
-# ============================================
-
 df.to_csv("customer_complaints_dataset.csv", index=False)
-
-# ============================================
-# PREVIEW DATA
-# ============================================
-
 print("\nDataset Created Successfully!")
 print(f"Total Complaints Collected: {len(df)}")
 
 print("\nSample Data:\n")
 print(df.head())
-
-# ============================================
-# OPTIONAL:
-# SAVE ONLY HIGH ESCALATION CASES
-# ============================================
-
 high_risk = df[df['escalation_risk'] == "High"]
 
 high_risk.to_csv("high_risk_complaints.csv", index=False)
 
 print("\nHigh escalation complaint dataset also saved.")
 
-# ============================================
-# CLEAN CUSTOMER COMPLAINT DATASET
-# ============================================
-
 import pandas as pd
 import re
-
-# ============================================
-# LOAD DATASET
-# ============================================
 
 df = pd.read_csv("customer_complaints_dataset.csv")
 
 print("Original Shape:", df.shape)
 
-# ============================================
-# REMOVE NULL VALUES
-# ============================================
-
 df.dropna(inplace=True)
-
-# ============================================
-# REMOVE DUPLICATES
-# ============================================
-
 df.drop_duplicates(subset=['review'], inplace=True)
-
-# ============================================
-# CLEAN TEXT FUNCTION
-# ============================================
 
 def clean_text(text):
 
@@ -235,22 +148,9 @@ def clean_text(text):
     text = re.sub(r'\\s+', ' ', text).strip()
 
     return text
-
-# ============================================
-# APPLY TEXT CLEANING
-# ============================================
-
 df['review'] = df['review'].apply(clean_text)
 
-# ============================================
-# REMOVE VERY SHORT REVIEWS
-# ============================================
-
 df = df[df['review'].str.len() > 15]
-
-# ============================================
-# REMOVE MEANINGLESS REVIEWS
-# ============================================
 
 bad_words = [
     'good',
@@ -271,46 +171,19 @@ df = df[~df['review'].isin(bad_words)]
 
 df = df[df['review'].str.strip() != '']
 
-# ============================================
-# STANDARDIZE CATEGORY NAMES
-# ============================================
-
 df['category'] = df['category'].replace({
     'General Complaint': 'General Issue',
     'Delivery Issue': 'Delivery Problem',
     'Refund Issue': 'Refund Problem'
 })
 
-# ============================================
-# CONVERT DATE COLUMN
-# ============================================
-
 df['review_date'] = pd.to_datetime(
     df['review_date'],
     errors='coerce'
 )
-
-# ============================================
-# REMOVE INVALID DATES
-# ============================================
-
-df.dropna(subset=['review_date'], inplace=True)
-
-# ============================================
-# RESET INDEX
-# ============================================
-
+f.dropna(subset=['review_date'], inplace=True)
 df.reset_index(drop=True, inplace=True)
-
-# ============================================
-# SAVE CLEANED DATASET
-# ============================================
-
 df.to_csv("cleaned_complaints_dataset.csv", index=False)
-
-# ============================================
-# SAVE HIGH RISK DATASET
-# ============================================
 
 high_risk = df[df['escalation_risk'] == 'High']
 
@@ -318,10 +191,6 @@ high_risk.to_csv(
     "cleaned_high_risk_complaints.csv",
     index=False
 )
-
-# ============================================
-# FINAL OUTPUT
-# ============================================
 
 print("\\nDataset Cleaned Successfully!")
 
