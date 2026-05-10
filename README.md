@@ -1,5 +1,4 @@
-🚀 AI-Powered User Feedback Analysis
-
+🚀 Customer Feedback Intelligence Analysis
 📌 Project Overview
 
 AI-powered end-to-end customer feedback analytics project that collects app reviews, processes textual feedback, stores structured data in MySQL, performs SQL-based business analytics, applies machine learning sentiment analysis, and visualizes insights through Power BI dashboards.
