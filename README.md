@@ -2,33 +2,30 @@
 
 📌 Project Overview
 
-This project analyzes app user reviews to extract meaningful business insights using AI-driven feedback analysis techniques.
+AI-powered end-to-end customer feedback analytics project that collects app reviews, processes textual feedback, stores structured data in MySQL, performs SQL-based business analytics, applies machine learning sentiment analysis, and visualizes insights through Power BI dashboards.
 
-The system collects customer feedback, stores structured data in MySQL, performs SQL-based analytical transformations, and visualizes actionable insights through an interactive Power BI dashboard.
-
-This project is being developed incrementally as an end-to-end analytics and AI solution.
+This project demonstrates a complete analytics workflow from raw customer feedback collection to actionable business intelligence.
 
 ---
 
 🎯 Problem Statement
 
-Businesses receive thousands of customer reviews across digital platforms every day, making manual analysis inefficient and time-consuming.
+Businesses receive large volumes of customer feedback across digital platforms, making manual analysis inefficient and difficult to scale.
 
-The challenge is to transform raw textual feedback into structured business intelligence that helps organizations understand customer concerns, identify critical issues, and improve decision-making.
+The challenge is to automatically process textual reviews, identify customer sentiment, detect high-risk complaints, classify issue categories, and generate meaningful business insights for decision-making.
 
 ---
 
-🎯 Objective
+🎯 Objectives
 
-The objective of this project is to:
-
-✅ Collect app user reviews automatically  
-✅ Clean and preprocess customer feedback data  
+✅ Collect customer reviews automatically from Google Play Store  
+✅ Clean and preprocess review data  
+✅ Detect sentiment and complaint categories  
+✅ Identify escalation-risk complaints  
 ✅ Store structured data in MySQL  
-✅ Perform SQL-based business analytics  
+✅ Transform data using SQL analytical views  
 ✅ Build interactive Power BI dashboards  
-✅ Detect complaint categories and escalation risks  
-✅ Generate actionable customer insights  
+✅ Apply machine learning for sentiment prediction  
 
 ---
 
@@ -37,6 +34,12 @@ The objective of this project is to:
 💻 Programming
 - Python
 - Pandas
+
+🤖 Machine Learning / NLP
+- Scikit-learn
+- TF-IDF Vectorization
+- Logistic Regression
+- NLTK
 
 🗄️ Database
 - MySQL
@@ -50,8 +53,6 @@ The objective of this project is to:
 
 ⚙️ Development Tools
 - VS Code
-- Git
-- GitHub
 
 ---
 
@@ -79,9 +80,11 @@ Python Data Collection
         ↓
 Data Cleaning & Preprocessing
         ↓
+Machine Learning Sentiment Analysis
+        ↓
 MySQL Database Storage
         ↓
-SQL Transformation Views
+SQL Analytical Views
    ├── dashboard_data
    ├── sentiment_summary
    ├── category_summary
@@ -95,36 +98,46 @@ Business Insights
 
 ---
 
+🤖 Machine Learning Implementation
+
+A machine learning sentiment classification model was developed using NLP techniques.
+
+Model workflow:
+
+✅ Text preprocessing  
+✅ Stopword removal  
+✅ TF-IDF vectorization  
+✅ Train-test split  
+✅ Logistic Regression classification  
+✅ Model evaluation  
+
+Evaluation metrics used:
+
+- Accuracy
+- Precision
+- Recall
+- F1 Score
+- Confusion Matrix
+
+---
+
 🗄️ SQL Analytics Integration
 
-SQL was used to transform raw review data into dashboard-ready analytical views.
+SQL was used to transform raw review data into dashboard-ready business datasets.
 
 Created SQL views:
 
-✅ `dashboard_data` → transformed dataset for dashboard consumption  
+✅ `dashboard_data` → transformed review dataset  
 ✅ `sentiment_summary` → sentiment distribution summary  
-✅ `category_summary` → complaint category counts  
+✅ `category_summary` → complaint category breakdown  
 ✅ `app_performance` → average rating, likes, review count by app  
-✅ `high_risk_reviews` → critical complaints requiring escalation  
-
-Example SQL query:
-
-```sql
-CREATE VIEW sentiment_summary AS
-SELECT
-    sentiment,
-    COUNT(*) AS total_reviews
-FROM cleaned_complaints_dataset
-GROUP BY sentiment;
-```
+✅ `high_risk_reviews` → critical complaint dataset  
 
 ---
 
 📊 Power BI Dashboard
 
-An interactive Power BI dashboard was created using SQL-transformed datasets.
-
-Dashboard KPIs & Visuals:
+Interactive dashboard includes:
 
 📍 Total Customer Reviews  
 📍 Critical Complaint Count  
@@ -146,6 +159,10 @@ AI-Powered-User-Feedback-Analysis/
 ├── data/
 │   └── cleaned_complaints_dataset.csv
 │
+├── scripts/
+│   ├── data_collection.py
+│   └── model_training.py
+│
 ├── sql/
 │   └── analysis_queries.sql
 │
@@ -155,61 +172,45 @@ AI-Powered-User-Feedback-Analysis/
 ├── screenshots/
 │   └── dashboard_preview.png
 │
-├── scripts/
-│   └── data_collection.py
+├── sentiment_model.pkl
+├── vectorizer.pkl
 │
 └── README.md
 ```
 
 ---
 
-📈 Current Progress
-
-✅ Data collection and preprocessing  
-✅ MySQL database integration  
-✅ SQL transformation views  
-✅ Business analytics queries  
-✅ Interactive Power BI dashboard  
-
-🔜 Upcoming:
-- Machine Learning sentiment classification
-- NLP model enhancement
-- predictive analytics integration
-- GitHub portfolio optimization
-
----
-
 💼 Business Use Cases
 
-This solution helps businesses:
+This solution helps organizations:
 
-📍 Understand customer sentiment patterns  
-📍 Detect critical complaints early  
-📍 Monitor service quality  
-📍 Identify recurring issue categories  
+📍 Monitor customer sentiment trends  
+📍 Detect urgent complaints early  
+📍 Identify recurring service issues  
 📍 Compare app performance  
-📍 Improve customer experience  
-📍 Support data-driven decision-making  
+📍 Improve customer satisfaction  
+📍 Support data-driven decision making  
 
 ---
 
 🚀 Future Enhancements
 
-Planned improvements:
-
-✨ Machine Learning sentiment classification  
-✨ NLP-based review intelligence  
-✨ Real-time dashboard updates  
-✨ Predictive complaint risk detection  
 ✨ Streamlit deployment  
+✨ Real-time feedback monitoring  
+✨ Advanced NLP (BERT / LSTM)  
+✨ Automated alert generation  
+✨ Multi-language review analysis  
 
 ---
 
 This project demonstrates:
 
 ✅ Python data engineering  
+✅ NLP preprocessing  
+✅ Machine learning implementation  
 ✅ SQL analytics  
-✅ MySQL database integration  
-✅ Power BI dashboarding  
+✅ MySQL database management  
+✅ SQL analytics using MySQL Workbench  
+✅ Power BI dashboard development  
 ✅ Business intelligence storytelling  
 ✅ End-to-end analytics workflow
